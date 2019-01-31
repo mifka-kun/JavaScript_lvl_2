@@ -18,7 +18,8 @@ class Menu {
         //TODO: удаление элемента ul
         let ourMenu = document.getElementById(this.id);
         if (ourMenu!==undefined){
-            ourMenu.innerHTML = "";
+            let divMenu = ourMenu.parentElement;
+            divMenu.innerHTML = "";
         }
 
     }
