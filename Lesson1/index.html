@@ -1,1 +1,29 @@
+<!DOCTYPE html>
+<html lang="rus">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="menu"></div>
+<script src="MenuItem.js"></script>
+<script src="Menu.js"></script>
+<script>
+    window.onload = () => {
+        let block = document.getElementById('menu');
 
+        let menu = new Menu('my', 'my', [
+            new MenuItem('/', 'Menu'),
+            new MenuItem('/about', 'About'),
+            new MenuItem('/services', 'Services'),
+            new MenuItem('/info', 'info'),
+            new SubMenu("","",[new MenuItem('/SubMenu', 'SubMenu')])
+        ]);
+
+        block.innerHTML = menu.render();
+        //menu.remove();
+    }
+
+</script>
+</body>
+</html>
