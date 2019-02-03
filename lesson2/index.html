@@ -1,1 +1,74 @@
+<!DOCTYPE html>
+<html lang="rus">
+<head>
+    <meta charset="UTF-8">
+    <title>Каталог</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrapper">
+<div class="menu" id="menu"></div>
+<div class="catalogList" id="catalogList"></div>
+</div>
+<div class="buttons">
+    <button id="OK">OK</button>
+    <button id="NotOk">Not OK</button>
+</div>
+<script src="MenuItem.js"></script>
+<script src="Menu.js"></script>
+<script src="GalleryItem.js"></script>
+<script>
+    function createMenu(){
+        let block = document.getElementById('menu');
+        let menu = new Menu('my', 'Menu', [
+            new SubMenu('/catalog', 'Каталог','me', 'Submenu', [
+                new MenuItem('/category1', 'Категория 1'),
+                new MenuItem('/category2', 'Категория 2')
+            ]),
+            new MenuItem('/services', 'Сервисы'),
+            new MenuItem('/info', 'Информация'),
+        ]);
 
+        block.innerHTML = menu.render();        
+    }
+    
+    function createGalery(){
+            let block = document.getElementById('catalogList');
+            fetch('gallery.json')
+                .then(result => result.json())
+                .then(data => {
+                    console.log(data);
+                    for (item of data){
+                        let img = new GalleryItem(item.src, item.alt);
+                    block.innerHTML+=img.render();
+                    }
+                })
+                .catch(error => console.log(error));
+        }
+    
+    function getButtonJSON(flag){
+        let fileName = "sucsess.json";
+        if (flag == false){
+            fileName = "error.json";
+        }
+            fetch(fileName)
+                .then(result => result.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.result == "sucsess") alert("Успех!");
+                    else if(data.result == "error") alert("Не успех");
+                    else alert("Что-то пошло не так!");
+                    })
+                .catch(error => console.log(error));
+    }
+        
+    
+    window.onload = () => {
+        createMenu();
+        createGalery();
+       document.getElementById('OK').addEventListener('click', () => getButtonJSON(true)); document.getElementById('NotOk').addEventListener('click', () => getButtonJSON(false));        
+    }
+
+</script>
+</body>
+</html>
