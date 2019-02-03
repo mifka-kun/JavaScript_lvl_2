@@ -4,6 +4,6 @@ class GalleryItem{
         this.alt  = alt;
     }
     render(){
-        return `<a href="${this.href}"><img src=${this.href} alt=${this.alt}</a></li>`
+        return `<a href="${this.href}"><img src=${this.href} alt=${this.alt}</a>`
     }
 }
