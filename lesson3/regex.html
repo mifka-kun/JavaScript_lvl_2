@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // Синтаксис 1
+    // let regExp = new RegExp('Регулярное выражение', 'флаги');
+
+    // Синтаксис 2 (приоритетный)
+    // let regExp = /регулярноевыражение/флаги
+
+    let str = 'Язык JavaScript назвали так из-за популярности языка Java';
+    let regExp = new RegExp('java', 'ig');
+
+    //Флаги
+    // i - поиск без чувствительности к регистру
+    // g - множественный поиск
+    // m - множественный поиск \n
+
+    // методы со стороны строки
+
+    //search
+    // -1 - если вхождений не найдено
+    // Возвращает индекс первого вхождения
+    // Игнорирует флаг g
+    console.log(str.search(regExp));
+
+
+    // let regExp1 = /java/;
+
+    //Match - чувствителен к флагу g
+    // Выдает расширенную информацию по вхождению
+    // если ничего не найдено - null
+    console.log(str.match(/java/ig));
+
+    // Замены
+
+    console.log('+7 (000)000-00-00'.replace('-', ':'));
+    console.log('+7 (000)000-00-00'.replace(/-/g, ':'));
+
+    let name = 'Doe, John';
+    console.log(name.replace(/([a-z]+), ([a-z]+)/i, 'Hello $2'));
+    console.log(name.replace(/([a-z]+), ([a-z]+)/i, 'Hello $&'));
+    console.log(name.replace(/([a-z]+), ([a-z]+)/i, '$2 $1'));
+
+    // Классы и наборы
+    // \d - [0123456789]- [0-9] - все цифры
+    // \s - space, tab, \n
+    // \w - [a-z0-9_]
+    // \b - граница слова
+    // [а-яА-ЯёЁ] - кириллица
+    // \D - все кроме цифр - [^0123456789]- [^0-9]
+    // \S - все кроме пробелов
+    // \W - [^a-z0-9_]
+    // \B - все кроме границ слова
+
+    // Квантификаторы
+    // {m} - строго m раз
+    // {m, n} - от m до n повторений
+    // {m,} - от m до бесконечности повторений
+    // {,m} - от до m повторений
+    // Сокращения
+    // + - {1,}
+    // * - {0,}
+    // ? - {0,1}
+
+    console.log('+7 (000)000-00-00'.match(/\d/g));
+    console.log('+7 (000)000-00-00'.match(/\d+/g));
+    console.log('+7 (000)000-00-00'.match(/\d+/g).join(''));
+    console.log('+7 (000)000-00-00'.match(/[\+\(\)-]/g));
+
+    console.log('color colour'.match(/colou?r/g));
+    console.log('color colour colotr'.match(/colo[ut]?r/g));
+
+    // Начало и конец строки
+    console.log('Язык java'.match(/^java/));
+    console.log('java Язык'.match(/^java/));
+
+    console.log('Язык java'.match(/java$/));
+    console.log('java Язык'.match(/java$/));
+
+    //границы слова
+    console.log('Язык java'.match(/\bjava\b/));
+    console.log('Язык javascript'.match(/\bjava\b/));
+
+    // Экранирование
+    console.log('Chapter 7.2'.match(/\d\.\d/));
+    console.log('Chapter 7d2'.match(/\d\.\d/));
+
+    // методы со стороны регуляра
+    //Метод test
+    // Возвращает либо true либо false
+    console.log(/java/i.test(str));
+    console.log(/java/.test(str));
+
+    //exec
+    console.log(/java/i.exec(str));
+    console.log(/java/ig.exec(str));
+
+    let result;
+    let regexp2 = /java/ig;
+
+    console.log(`Начальный lastIndex ${regexp2.lastIndex}`);
+
+    while (result = regexp2.exec(str)){
+        console.log(result);
+        console.log(`Текущий lastIndex ${regexp2.lastIndex}`);
+    }
+    console.log(`Конечный lastIndex ${regexp2.lastIndex}`);
+</script>
+</body>
+</html>
