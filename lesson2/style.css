@@ -1,0 +1,46 @@
+div {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+button {
+    margin: 50px 50px;
+}
+
+.Menu > li{
+    display: inline-block;
+    margin-left: 25px;
+}
+
+ul {
+    list-style: none;
+    float: right;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover {
+    border-bottom: 2px solid blue;
+}
+
+.Submenu  {
+  position:absolute;
+}
+
+.Menu .Submenu {
+    display: none;
+    margin-left: 0;
+}
+
+.Menu li:hover .Submenu {
+    display: block;
+}
+
+img {
+    margin-top: 50px;
+    margin-left: 50px;
+    width: 220px;
+    display: inline;
+}
