@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="rus">
+<head>
+    <meta charset="UTF-8">
+    <title>RegExp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body
+    <div class="wrapper">
+        <div id="texttoreplace"></div>
+        <button id="First">Заменить кавычки на двойные</button>
+        <button id="Second">Заменить кавычки на двойные кроме слов</button>
+        <form action="#" method="post" id="myform">
+           <fieldset>
+            <input id = "name" type="text" placeholder="Ваше Имя"><br>
+            <input id = "phone" type="text" placeholder="Ваш телефон +7(000)000-0000"><br>
+            <input id = "email" type="text" placeholder="Ваш e-mail @mail.ru"><br>
+            <input id = "btnSubmit" type="submit" value="Подтвердить"><br>
+            </fieldset>
+        </form>
+        <div id="erorSet"></div>
+    </div>
+    <script src="FormChecker.js"></script> 
+    <script>
+        let text = ""; 
+        
+        function fillTextInToDiv (divID, text){
+            let textDiv = document.getElementById(divID);
+            textDiv.innerHTML = text.replace(/\n/gm,'<br>');
+        }
+        
+        window.onload = () => {
+            fetch("texttoreplace.txt")
+                .then(result => result.text())
+                .then(data => {
+                    text = data;
+                    fillTextInToDiv("texttoreplace",text);
+                });
+
+        document.getElementById("First").addEventListener("click", e => fillTextInToDiv("texttoreplace",text.replace(/'/gm,'"')));
+        document.getElementById("Second").addEventListener("click", e => fillTextInToDiv("texttoreplace",text.replace(/([\W])'/gm,'$1"')));
+        document.getElementById("btnSubmit").addEventListener("click", e =>{
+        e.preventDefault();
+            let checker = new FormChecker([
+                new InputChecker("name", "Имя",/[a-zа-яё]{2,}/),
+                new InputChecker("phone", "Телефон",/\+7\(\d{3}\)\d{3}-\d{4}/),
+                new InputChecker("email", "e-mail",/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/)]);
+        checker.checkAllFields();       
+        });
+        
+    
+        }
+    </script>
+</body>
+</html>

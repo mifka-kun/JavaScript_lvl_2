@@ -1,0 +1,12 @@
+div {
+    margin: 0 auto;
+    width: 1000px;
+}
+
+form {
+    width: 300px;    
+}
+
+input[type="text"] {
+    width: 200px;
+}
